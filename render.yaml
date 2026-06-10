@@ -1,0 +1,34 @@
+services:
+  - type: web
+    name: realtime-nlp-api
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: CORS_ORIGINS
+        value: "*"
+      - key: LLM_PROVIDER_ORDER
+        value: groq,openai,ollama,fallback
+      - key: DATABASE_URL
+        fromDatabase:
+          name: realtime-nlp-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          name: realtime-nlp-redis
+          type: redis
+          property: connectionString
+
+  - type: redis
+    name: realtime-nlp-redis
+    plan: free
+    ipAllowList: []
+
+databases:
+  - name: realtime-nlp-db
+    plan: free
+

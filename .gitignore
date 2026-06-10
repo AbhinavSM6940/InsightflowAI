@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+.venv-*/
+venv/
+env/
+
+# Local runtime state
+logs/
+*.log
+*.db
+*.db-journal
+
+# Generated model and visualization artifacts
+models/
+data/*.db
+data/*.db-journal
+data/*_entities.json
+data/knowledge_graph.*
+data/ldavis_topics.html
+data/vector_store/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
